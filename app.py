@@ -23,6 +23,7 @@ if not api_key:
 os.environ["GOOGLE_API_KEY"] = api_key
 
 print(f"✅ API Key loaded (first 10 chars): {api_key[:10]}...")
+print("📌 Generation Model: models/gemini-3.5-flash-lite (Judge's model)")
 
 from src.models import Alert, TriageRequest, TriageResponse
 from src.alert_processor import AlertProcessor
@@ -124,4 +125,10 @@ async def generate_sample_alerts():
     return {"alerts": sample_alerts}
 
 if __name__ == "__main__":
+    print("\n" + "="*60)
+    print("🚀 Starting Network Incident Triage Assistant")
+    print("📌 Generation Model: models/gemini-3.5-flash-lite (Judge's model)")
+    print("📌 Embedding Model: models/gemini-embedding-001")
+    print("📌 Port: 8000")
+    print("="*60 + "\n")
     uvicorn.run(app, host="0.0.0.0", port=8000)

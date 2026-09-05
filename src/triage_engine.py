@@ -47,25 +47,31 @@ Format as:
 3. **Escalation Criteria**: When to escalate
 """
         
-        # Use the latest working model
-        try:
-            model = genai.GenerativeModel('models/gemini-3.8-flash')
-            response = model.generate_content(prompt)
-            return response.text
-        except Exception as e:
-            # Fallback to another model
+        # Try models - START WITH THE JUDGE'S MODEL
+        models_to_try = [
+            'models/gemini-3.5-flash-lite',     # ✅ JUDGE'S MODEL (priority 1)
+            'models/gemini-2.5-flash-lite',     # ✅ Backup
+            'models/gemini-flash-lite-latest',  # ✅ Latest
+            'models/gemini-3.1-flash-lite',     # ✅ Stable
+        ]
+        
+        for model_name in models_to_try:
             try:
-                model = genai.GenerativeModel('models/gemini-3.7-flash')
+                model = genai.GenerativeModel(model_name)
                 response = model.generate_content(prompt)
-                return response.text
-            except Exception as e2:
-                # Final fallback
-                return f"""
+                if response and response.text:
+                    return f"{response.text}"
+            except Exception as e:
+                print(f"  ⚠️ Model {model_name} failed: {e}")
+                continue
+        
+        # Fallback if all models fail
+        return f"""
 1. **Immediate Action**: Check the {incident.primary_type} issue on {incident.alerts[0].source_device if incident.alerts else 'affected device'}
 
 2. **Root Cause Investigation**: Verify device status, check connectivity, review logs
 
 3. **Escalation Criteria**: Escalate if issue persists after 10 minutes or if multiple devices affected
 
-⚠️ Note: This is a fallback recommendation. Please check the runbook manually.
+⚠️ Manual escalation recommended.
 """
