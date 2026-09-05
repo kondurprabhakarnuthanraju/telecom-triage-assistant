@@ -1,0 +1,23 @@
+﻿# Runbook: Link Down
+
+## Symptoms
+- Interface status shows DOWN
+- Neighbor device unreachable
+- Traffic drops to zero on affected link
+- BGP neighbor may go down
+
+## Immediate Actions (Priority 1)
+1. Check physical connectivity (cables, SFP modules)
+2. Verify interface configuration is correct
+3. Check for administrative shutdown
+4. Verify remote device is powered on
+
+## Escalation Criteria
+- If link doesn't recover after 5 minutes
+- If multiple links down simultaneously
+- If critical customer link affected
+
+## Severity
+- Single link: Medium
+- Redundant link: Low
+- Core backbone link: High

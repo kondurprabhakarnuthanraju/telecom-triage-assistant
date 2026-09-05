@@ -1,0 +1,22 @@
+﻿# Runbook: High Latency
+
+## Symptoms
+- Response time > 100ms
+- Packet loss > 1%
+- Jitter > 50ms
+- VoIP quality degradation
+
+## Immediate Actions (Priority 2)
+1. Check interface utilization on path
+2. Verify no routing loops
+3. Check for broadcast storms
+4. Verify QoS policies are applied
+
+## Escalation Criteria
+- Latency persists > 10 minutes
+- Customer impact confirmed
+- Multiple customers affected
+
+## Severity
+- Internal network: Medium
+- Customer-facing: High

@@ -1,0 +1,23 @@
+﻿# Runbook: Device Unreachable
+
+## Symptoms
+- Ping/ICMP timeout
+- SNMP polling fails
+- SSH/management access denied
+- Device appears offline in NMS
+
+## Immediate Actions (Priority 1)
+1. Check device power status
+2. Verify management IP is correct
+3. Check routing to device subnet
+4. Verify no ACL blocking ICMP/SNMP
+
+## Escalation Criteria
+- Device unreachable > 3 minutes
+- Multiple devices in same rack/pop
+- Device is a core router/switch
+
+## Severity
+- Access switch: Medium
+- Distribution switch: High
+- Core router: Critical

@@ -1,0 +1,23 @@
+﻿# Runbook: Authentication Failure
+
+## Symptoms
+- Login attempts failing
+- AAA server unreachable
+- RADIUS/TACACS+ timeouts
+- Account lockout notifications
+
+## Immediate Actions (Priority 2)
+1. Check AAA server status
+2. Verify shared secret is correct
+3. Check network connectivity to AAA
+4. Verify user account is active
+
+## Escalation Criteria
+- Multiple users affected
+- Privileged accounts locked
+- Active attack suspected
+
+## Severity
+- Single user: Low
+- Multiple users: High
+- All users: Critical
